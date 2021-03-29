@@ -8,6 +8,8 @@ Unfortunately, Metro does not publish stop or neighborhood level data,
 so it can be difficult to identify precisely which neighborhoods have seen the biggest changes,
 but nonetheless, some broad patterns are visible.
 
+![ridership-recovery-map](./metro-recovery-map.png)
+
 ### Orientation
 
 #### Code
