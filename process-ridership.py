@@ -12,6 +12,36 @@ ridership = ridership.rename(columns={"Estimated Ridership": "ridership"})
 # Select weekday ridershpi
 weekday_ridership = ridership[ridership["Day Type"] == "Weekday"]
 
+# Combine some rapids and locals. This is especially important because Metro
+# eliminated some rapids in favor of increased local service in December 2020,
+# So in order to get a good baseline, we need to treat them as the same.
+rapids = {
+    "28/728": ["28", "728"],
+    "105/705": ["105", "705"],
+    "210/710": ["210", "710"],
+    "40/740": ["40", "740"],
+    "45/745": ["45", "745"],
+    "251/751": ["251", "751"],
+    "60/760": ["60", "760"],
+    "260/762": ["260", "762"],
+}
+
+def combine_rapids(row):
+    for k,v in rapids.items():
+        if row.line in v:
+            return k
+    return row.line
+
+weekday_ridership = (
+    weekday_ridership
+    .assign(line=weekday_ridership.apply(combine_rapids, axis=1))
+    .groupby(["year", "month", "line"])
+    .ridership
+    .sum()
+    .to_frame()
+    .reset_index()
+)
+
 # Get yearly averages for each line so we can compare line ridership to
 # baseline values from previous years
 yearly_averages = (
