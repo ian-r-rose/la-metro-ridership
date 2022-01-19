@@ -1,0 +1,19 @@
+name: metro
+channels:
+  - conda-forge 
+dependencies:
+  - python=3.9
+  - geopandas
+  - pygeos
+  - matplotlib
+  - contextily
+  - pandas
+  - tweepy
+  - pyarrow
+  - python-dotenv
+  - requests
+  - pip
+  - protobuf
+  - pip:
+    - gtfs-realtime-bindings
+    - partridge
