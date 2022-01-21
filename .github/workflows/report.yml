@@ -36,3 +36,4 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add -A cancellation-reports/ && git diff --cached --exit-code --quiet || git commit -m "Updated cancellation reports"
+          git push
